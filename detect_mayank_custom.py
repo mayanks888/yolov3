@@ -97,7 +97,7 @@ def detect(save_img=False):
 
         # Apply NMS
         pred = non_max_suppression(pred, opt.conf_thres, opt.iou_thres,
-                                   multi_label=True, classes=opt.classes, agnostic=opt.agnostic_nms)
+                                   multi_label=False, classes=opt.classes, agnostic=opt.agnostic_nms)
 
         # Apply Classifier
         if classify:
@@ -168,14 +168,14 @@ def detect(save_img=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, default='cfg/yolov4.cfg', help='*.cfg path')
-    parser.add_argument('--names', type=str, default='data/coco.names', help='*.names path')
-    parser.add_argument('--weights', type=str, default='weights/yolov4.weights', help='weights path')
-    parser.add_argument('--source', type=str, default='/home/mayank_s/datasets/coco/test2017', help='source')  # input file/folder, 0 for webcam
+    parser.add_argument('--cfg', type=str, default='/home/mayank_s/codebase/others/yolo/yolov4/yolov3/mayank_script/yolov4_modfied.cfg', help='*.cfg path')
+    parser.add_argument('--names', type=str, default='/home/mayank_s/datasets/bdd/training_set/bdd100k_tl.names', help='*.names path')
+    parser.add_argument('--weights', type=str, default='/home/mayank_s/datasets/bdd/yolo_trained_weights/best.pt', help='weights path')
+    parser.add_argument('--source', type=str, default='/home/mayank_s/Desktop/template/farm_1/saved_temp_img', help='source')  # input file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='/home/mayank_s/Desktop/yolo_output', help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=512, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
-    parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
+    parser.add_argument('--conf-thres', type=float, default=0.01, help='object confidence threshold')
+    parser.add_argument('--iou-thres', type=float, default=0.1, help='IOU threshold for NMS')
     parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
     parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
     parser.add_argument('--device', default='', help='device id (i.e. 0 or 0,1) or cpu')
